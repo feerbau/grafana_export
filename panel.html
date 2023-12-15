@@ -1,11 +1,14 @@
-<form id="dashboardForm" action="tu_url_de_destino" method="post">
-    <input type="hidden" name="apikey" value="tu_apikey_aqui">
-    <input type="hidden" name="url" id="currentUrl" value="">
-    <button type="submit">
-        Print Dashboard <i class="fa fa-print"></i>
+<form id="dashboardForm" action="https://3208-181-116-92-208.ngrok-free.app/generate" method="post">
+    <input type="hidden" name="grafana_auth_token" value="dasdasdas">
+    <input type="hidden" name="target_url" id="currentUrl" value="">
+    <button type="submit" onclick="printDashboard()" style="background-color: #007bff; color: white;">
+        Print as PDF <i class="fa fa-print"></i>
     </button>
 </form>
 
 <script>
-    document.getElementById("currentUrl").value = window.location.href;
+    function printDashboard() {
+        document.getElementById("currentUrl").value = window.location.href;
+        // Aquí puedes agregar el código adicional para imprimir el dashboard
+    }
 </script>

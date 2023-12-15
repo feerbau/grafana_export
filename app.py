@@ -6,6 +6,7 @@ from playwright.async_api import async_playwright
 
 app = flask.Flask(__name__)
 
+
 async def generate_pdf(
         target_url: str,
         auth_token: Optional[str],

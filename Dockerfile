@@ -17,4 +17,4 @@ EXPOSE 5000
 
 # Establecer el punto de entrada
 # ENTRYPOINT ["flask", "--app", "server", "run"]
-CMD ["flask", "run"]
+CMD ["flask", "run", "--host=0.0.0.0"]
