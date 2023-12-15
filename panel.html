@@ -1,0 +1,11 @@
+<form id="dashboardForm" action="tu_url_de_destino" method="post">
+    <input type="hidden" name="apikey" value="tu_apikey_aqui">
+    <input type="hidden" name="url" id="currentUrl" value="">
+    <button type="submit">
+        Print Dashboard <i class="fa fa-print"></i>
+    </button>
+</form>
+
+<script>
+    document.getElementById("currentUrl").value = window.location.href;
+</script>
