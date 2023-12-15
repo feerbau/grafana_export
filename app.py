@@ -66,9 +66,8 @@ def index():
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    body = request.get_json()
-    grafana_auth_token = body.get('grafana_auth_token')
-    target_url = body.get('target_url')
+    grafana_auth_token = request.form.get('grafana_auth_token')
+    target_url = request.form.get('target_url')
 
     if not grafana_auth_token:
         return flask.render_template('index.html', error='Grafana auth token is required')
