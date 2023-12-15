@@ -9,9 +9,12 @@ COPY requirements.txt .
 
 # Instalar los requisitos
 RUN pip install --no-cache-dir -r requirements.txt
-
+RUN playwright install
 # Copiar el código fuente al contenedor
 COPY . .
 
+EXPOSE 5000
+
 # Establecer el punto de entrada
-ENTRYPOINT ["python", "server.py"]
+# ENTRYPOINT ["flask", "--app", "server", "run"]
+CMD ["flask", "run"]

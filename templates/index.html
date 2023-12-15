@@ -6,5 +6,10 @@
 </head>
 <body>
     <h1>Home</h1>
-    <p>Hi!</p>
+    {% if error %}
+        <h3>Error </h3>
+        <p style="color: red;">{{ error }}</p>
+    {% else %}
+        <p>Hi!</p>
+    {% endif %}
 </body>

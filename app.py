@@ -1,8 +1,8 @@
 import flask
+from flask import request
 import asyncio
 from typing import Optional
 from playwright.async_api import async_playwright
-import os
 
 app = flask.Flask(__name__)
 
@@ -46,10 +46,10 @@ async def generate_pdf(
         await browser.close()
 
 
-async def main():
+async def main(grafana_auth_token, target_url):
 
-    target_url = os.environ.get('GRAFANA_URL_DASH')  # Tip: add '&kiosk' at the end of your grafana URL to hide tool tabs
-    grafana_auth_token: str = os.environ.get('GRAFANA_AUTH_TOKEN')
+    # target_url = os.environ.get('GRAFANA_URL_DASH')  # Tip: add '&kiosk' at the end of your grafana URL to hide tool tabs
+    # grafana_auth_token: str = os.environ.get('GRAFANA_AUTH_TOKEN')
     destination_file: str = f'./grafana_report.pdf'
 
     await generate_pdf(
@@ -63,7 +63,16 @@ async def main():
 def index():
     return flask.render_template('index.html')
 
-@app.route('/generate', methods=['GET', 'POST'])
+@app.route('/generate', methods=['POST'])
 def generate():
-    asyncio.run(main())
+    body = request.get_json()
+    grafana_auth_token = body.get('grafana_auth_token')
+    target_url = body.get('target_url')
+
+    if not grafana_auth_token:
+        return flask.render_template('index.html', error='Grafana auth token is required')
+    if not target_url:
+        return flask.render_template('index.html', error='Grafana target url is required')
+    
+    asyncio.run(main(grafana_auth_token=grafana_auth_token, target_url=target_url))
     return flask.send_file('./grafana_report.pdf', as_attachment=True)
