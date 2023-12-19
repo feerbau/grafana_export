@@ -9,7 +9,8 @@ COPY requirements.txt .
 
 # Instalar los requisitos
 RUN pip install --no-cache-dir -r requirements.txt
-RUN playwright install
+RUN playwright install 
+RUN playwright install-deps 
 # Copiar el código fuente al contenedor
 COPY . .
 
